@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Janala</title>
+
+  <!-- DaisyUI & TailwindCSS -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    .active{
+        background:#570DF8 ;
+        color: white;
+    }
+    html {
+  scroll-behavior: smooth;
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const loginBtn = document.getElementById('login-btn'); // Get Started Button (which is used as the login button)
+
+  loginBtn.addEventListener('click', () => {
+    const nameInput = document.querySelector('input[type="text"]');
+    const passwordInput = document.querySelector('input[type="password"]');
+
+    const name = nameInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (name && password === '123456') {
+      // Hide Hero Section
+      document.getElementById('hero-section').classList.add('hidden');
+
+      // Show the rest of the sections
+      document.getElementById('navber-section').classList.remove('hidden');
+      document.getElementById('vocabulary-section-1').classList.remove('hidden');
+      document.getElementById('vocabulary-section-2').classList.remove('hidden');
+      document.getElementById('vocabulary-section-3').classList.remove('hidden');
+      document.getElementById('faq').classList.remove('hidden');
+      alert("Sucessfully Login.")
+      // Optionally scroll to the top to avoid unexpected scrolling
+      window.scrollTo(0, 0); // Scrolls to the top of the page
+
+    } else {
+      alert('Invalid name or password! Hint: Password is 123456');
+    }
+  });
+});
+
+
+</script>
+</head>
+<body>
+  <!-- Header -->
+  <header id="navber-section" class="bg-slate-100 hidden fixed top-0 left-0 w-full bg-white shadow z-50">
+    <div class="w-11/12 mx-auto py-5 flex justify-between items-center">
+      <div class="flex items-center gap-1">
+        <span class="font-bold">English</span>
+        <img src="./assets/logo.png" alt="Logo" class="w-[40px]" />
+        <span class="font-bold">জানালা</span>
+      </div>
+      <div class="flex-none space-x-2">
+        <a href="#vocabulary-section-1">
+          <button class="btn btn-outline btn-primary">
+          <img id="btn-learn" class="w-4 h-4" src="./assets/open-book.png" alt="" /> Learn
+        </button>
+        </a>
+
+        <a href="#faq">
+          <button class="btn btn-outline btn-primary">
+          <img id="btn-faq" class="w-4 h-4" src="./assets/question.png" alt="" /> FAQ
+        </button>
+        </a>
+        
+        <button onclick="handleLogout()" class="btn btn-outline btn-primary">
+          <img id="btn-logout" class="w-4 h-4" src="./assets/logout.png" alt="" /> Logout
+        </button>
+      </div>
+    </div>
+    <hr class="bg-[#FFEBEB] h-1 border-0" />
+  </header>
+
+  <!-- Hero Section -->
+  <div id="hero-section" class="flex w-11/12 mx-auto justify-between items-center py-10 gap-10 ">
+    <!-- Left Content -->
+    <div class="p-6 max-w-xl">
+      <h1 class="text-4xl font-bold mb-4">
+        <span class="text-cyan-600">English</span> is Easy!!
+      </h1>
+      <p class="text-gray-700 mb-6 leading-relaxed">
+        আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান, আমাদের
+        <span class="font-semibold">Interactive Lessons</span> আপনাকে নিয়ে যাবে অন্য একটি Level এ।
+      </p>
+      <div class="flex flex-col gap-4">
+        <input type="text" placeholder="Enter your Name" class="input input-md" />
+        <input type="password" placeholder="Enter your password" class="input input-md" />
+        <button id="login-btn" class="btn btn-active btn-primary w-1/3">Get Started</button>
+      </div>
+    </div>
+    <!-- Right Image -->
+    <div>
+      <img src="./assets/hero-student.png" alt="Hero student" class="w-full h-auto object-contain" />
+    </div>
+  </div>
+
+  <!-- Vocabulary Section -->
+  <section id="vocabulary-section-1" class="w-11/12 mx-auto hidden pt-28">
+    <div  class="flex flex-col items-center text-center gap-6">
+      <h1 class="text-3xl font-bold text-gray-800">Let's Learn Vocabularies</h1>
+      <div id="category-container" class="flex flex-wrap justify-center gap-3">
+
+      </div>
+    </div>
+    <div id="spinner" class="hidden flex justify-center items-center space-x-1 my-4">
+  <div class="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.5s]"></div>
+  <div class="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.5s]"></div>
+  <div class="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+</div>
+
+
+
+    <section id="start-section">
+      <div  class="bg-[#F8F8F8] my-6 flex flex-col items-center text-center gap-4 py-24 rounded-3xl">
+      <p class="text-[#79716B]">আপনি এখনো কোন Lesson Select করেননি</p>
+      <h1 class="text-3xl font-bold">একটি Lesson Select করুন।</h1>
+    </div>
+    </section>
+    
+  </section>
+
+  <!-- dynamic secton-cart -->
+ <section id="vocabulary-section-2" class="w-11/12 mx-auto hidden">
+    <!-- <div  class="flex flex-col items-center text-center gap-6">
+      <div id="category-container" class="flex flex-wrap justify-center gap-3">
+      </div>
+    </div> -->
+
+ <div id="cart-box" class="bg-[#F8F8F8] my-6 flex flex-col items-center text-center gap-4 py-6 rounded-3xl">
+  <div id="cart-container"></div>
+</div>
+
+    </div>
+    
+  </section>
+
+  <!-- dynamic section not found -->
+   <section id="vocabulary-section-3" class="w-11/12 mx-auto hidden">
+    <!-- <div  class="flex flex-col items-center text-center gap-6">
+      <h1 class="text-3xl font-bold text-gray-800">Let's Learn Vocabularies</h1>
+      <div id="category-container" class="flex flex-wrap justify-center gap-3">
+      </div>
+    </div> -->
+
+    <div id="cart-error" class="bg-[#F8F8F8] my-10  flex flex-col items-center text-center gap-4  rounded-3xl">
+      <!-- dynamically added -->
+      </h1>
+    </div>
+    
+  </section>
+
+
+  <!-- FAQ Section -->
+  <section id="faq" class="w-11/12 mx-auto faq-section my-28 hidden">
+    <div class="flex flex-col items-center text-center gap-6">
+      <h1 class="text-4xl font-bold mb-4">
+        <span class="text-cyan-600">Frequently</span> Asked Questions
+      </h1>
+    </div>
+
+    <!-- FAQ Reusable Blocks -->
+<div class="space-y-3">
+  <!-- Question 1 -->
+  <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300">
+    <input type="radio" name="faq-accordion" checked="checked" />
+    <div class="collapse-title font-semibold">
+      1. What is the Difference between var, let, and const?
+    </div>
+    <div class="collapse-content text-sm">
+      <p>var: Function-scoped, hoisted, can be re-declared and updated. <br>
+         let: Block-scoped, not hoisted like var, can be updated but not re-declared in the same scope. <br>
+         const: Block-scoped, cannot be updated or re-declared (must be initialized).</p>
+    </div>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300">
+    <input type="radio" name="faq-accordion" />
+    <div class="collapse-title font-semibold">
+      2. What is the  difference between map(), forEach(), and filter()?
+    </div>
+    <div class="collapse-content text-sm">
+      <p>map(): Returns a new array after applying a function to each element. <br>
+        forEach(): Executes a function on each element but returns undefined. <br>
+        filter(): Returns a new array with elements that pass a condition.</p>
+    </div>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300">
+    <input type="radio" name="faq-accordion" />
+    <div class="collapse-title font-semibold">
+      3. Arrow Functions vs Regular Functions.
+    </div>
+    <div class="collapse-content text-sm">
+      <p>Arrow functions are shorter (()=>{}) and do not bind this.
+<br>
+Regular functions have their own this context. <br>
+Arrow functions are best for callbacks or non-method functions.</p>
+    </div>
+  </div>
+
+  <!-- Question 4 -->
+  <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300">
+    <input type="radio" name="faq-accordion" />
+    <div class="collapse-title font-semibold">
+      4. How JavaScript Promises Work?
+    </div>
+    <div class="collapse-content text-sm">
+      <p>A Promise represents a value that will be available in the future (async).
+        It can be in three states: pending, fulfilled, or rejected.
+        Use .then() for success, .catch() for errors.</p>
+    </div>
+  </div>
+  <!-- Question 5 -->
+   <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300">
+    <input type="radio" name="faq-accordion" />
+    <div class="collapse-title font-semibold">
+      5.How Closures Work in JavaScript?
+    </div>
+    <div class="collapse-content text-sm">
+      <p>A closure is when a function remembers variables from its outer scope, even after that scope has finished executing.Used in private data, callbacks, and more.</p>
+    </div>
+  </div>
+</div>
+
+  </section>
+
+  <hr class="bg-[#FFEBEB] h-1 border-0" />
+
+  <!-- Footer -->
+  <footer class="w-11/12 mx-auto footer flex justify-between items-center bg-white text-neutral py-14">
+    <aside>
+      <div class="flex items-center gap-1">
+        <span class="font-bold">English</span>
+        <img src="./assets/logo.png" alt="Logo" class="w-[40px]" />
+        <span class="font-bold">জানালা</span>
+      </div>
+      <p class="pt-4">
+        <span class="font-bold">ইংরেজি শিখুন সহজে</span><br />
+        Providing ED-Tech Applications since 2025
+      </p>
+    </aside>
+
+    <nav>
+      <h6 class="footer-title">FOLLOW US</h6>
+      <div class="grid grid-flow-col items-center gap-4">
+        <a><img class="w-5" src="./assets/fb-thumb.png" alt="Facebook" /></a>
+        <a><img class="w-5" src="./assets/youtube-thumb.png" alt="YouTube" /></a>
+        <a><img class="w-5" src="./assets/instagram-thumb.png" alt="Instagram" /></a>
+        <a><img class="w-5" src="./assets/github-thumb.png" alt="GitHub" /></a>
+      </div>
+    </nav>
+  </footer>
+
+
+  <dialog id="cart_details" class="modal">
+  <div class="modal-box">
+    <div id="details-container">
+
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <!-- <button class="btn">Close</button> -->
+      </form>
+    </div>
+  </div>
+</dialog>
+
+
+  <script src="./script/script.js"></script>
+</body>
+</html>
